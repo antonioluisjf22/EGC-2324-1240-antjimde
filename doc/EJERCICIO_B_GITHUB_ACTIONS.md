@@ -97,3 +97,25 @@ gh release list
 # Ver acciones ejecutadas
 gh run list --workflow django.yml
 ```
+
+## Resolución de Incompatibilidades
+
+### Problema: django-nose incompatible con Python 3.10+
+
+**Error**: `AttributeError: module 'collections' has no attribute 'Callable'`
+
+**Causa**: `django-nose` 1.4.6 está deprecado y tiene incompatibilidades con Python 3.10+ (el atributo `collections.Callable` se movió a `collections.abc.Callable` en Python 3.10).
+
+**Solución**: Remover `django-nose` de `requirements.txt` y usar el test runner nativo de Django.
+
+**Cambios realizados**:
+- ❌ Removido: `django-nose==1.4.7` de `requirements.txt`
+- ❌ Removido: `TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'` de `decide/settings.py`
+- ✅ Actualizado: Workflows usan `python manage.py test voting` (test runner nativo)
+- ✅ Resultado: Compatible con Python 3.10+ y 3.11.6
+
+**Ventajas del cambio**:
+- Usa Django test runner oficial
+- Mejor compatibilidad con versiones recientes de Python
+- Menos dependencias
+- Más mantenible a largo plazo
