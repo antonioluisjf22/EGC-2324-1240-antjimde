@@ -6,7 +6,7 @@ on:
       - main  
 
 jobs:
-  build-3.10:
+  build-310:
 
     runs-on: ubuntu-latest
 
@@ -45,7 +45,7 @@ jobs:
         cd decide
         ./manage.py test voting --keepdb
 
-  build-3.11:
+  build-311:
 
     runs-on: ubuntu-latest
 
