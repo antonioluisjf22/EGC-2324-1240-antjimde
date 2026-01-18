@@ -162,10 +162,17 @@ KEYBITS = 256
 ALLOWED_VERSIONS = ['v1', 'v2']
 DEFAULT_VERSION = 'v1'
 
-try:
-    from local_settings import *
-except ImportError:
-    print("local_settings.py not found")
+# Load environment-specific local settings
+if os.environ.get('ENVIRONMENT') == 'render' or os.environ.get('DATABASE_URL'):
+    try:
+        from local_settings_render import *
+    except ImportError:
+        print("local_settings_render.py not found")
+else:
+    try:
+        from local_settings import *
+    except ImportError:
+        print("local_settings.py not found")
 
 # loading jsonnet config
 if os.path.exists("config.jsonnet"):
