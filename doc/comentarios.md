@@ -11,3 +11,19 @@
 #   - Removido: django-nose==1.4.7 de requirements.txt
 #   - Removido: TEST_RUNNER = 'django_nose.NoseTestSuiteRunner' de settings.py
 #   - Actualizado workflow: python manage.py test voting (runner nativo)
+
+# CREACIÓN DE SUPERUSER PARA DOCKER
+**Crear superusuario (si no existe):**
+   ```bash
+   docker exec -it decide_web ash
+   cd /app/decide
+   python manage.py shell
+   ```
+   
+   Dentro del shell:
+   ```python
+   from django.contrib.auth.models import User
+   User.objects.create_superuser('admin', 'admin@example.com', 'admin')
+   print("Admin creado!")
+   exit()
+   ```
