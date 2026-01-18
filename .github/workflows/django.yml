@@ -45,7 +45,6 @@ jobs:
         cd decide
         ./manage.py test voting --keepdb
 
-jobs:
   build-3.11:
 
     runs-on: ubuntu-latest
