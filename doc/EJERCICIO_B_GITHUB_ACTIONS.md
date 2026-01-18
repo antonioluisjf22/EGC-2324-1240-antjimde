@@ -21,12 +21,13 @@ Se han configurado dos workflows de GitHub Actions para automatizar pruebas y ge
 
 ### Balance Técnico-Organizativo (5-7)
 ✅ **Apartado 5**: Workflow `django.yml` configurado con **dos versiones de Python**
-- **Job `build-3.10`**: Pruebas con Python 3.10.12
-- **Job `build-3.11`**: Pruebas con Python 3.11.6
+- **Job `build-310`**: Pruebas con Python 3.10.12
+- **Job `build-311`**: Pruebas con Python 3.11.6
 - Ambos jobs ejecutan el módulo voting de forma independiente
 
 ✅ **Apartado 6**: Cambios realizados, commitados y pusheados
-- Se corrigió versión incorrecta en job build-3.11 (estaba 3.10.12, ahora 3.11.6)
+- Se corrigió versión incorrecta en job build-311 (estaba 3.10.12, ahora 3.11.6)
+- Se renombraron jobs a `build-310` y `build-311` para cumplir validación YAML
 
 ✅ **Apartado 7**: Verificación de funcionamiento
 - Ambos jobs se ejecutan en paralelo correctamente
@@ -51,8 +52,10 @@ Se han configurado dos workflows de GitHub Actions para automatizar pruebas y ge
 | Cambio | Descripción |
 |--------|---|
 | Indentación `on: push:` | Corregido para ejecutar solo en main |
-| Job `build-3.10` | Tests del módulo voting con Python 3.10.12 |
-| Job `build-3.11` | Tests del módulo voting con Python 3.11.6 (versión corregida) |
+| Jobs duplicados | Eliminada declaración duplicada de `jobs:` |
+| Job `build-310` | Tests del módulo voting con Python 3.10.12 |
+| Job `build-311` | Tests del módulo voting con Python 3.11.6 (versión corregida) |
+| Nombres de jobs | Renombrados de `build-3.10/3.11` a `build-310/311` para validación YAML |
 | Tests | Cambiados a `./manage.py test voting` |
 
 ### `.github/workflows/release.yml`
@@ -68,9 +71,9 @@ Se han configurado dos workflows de GitHub Actions para automatizar pruebas y ge
 Push a main
     ↓
 [Dispara django.yml + release.yml en paralelo]
-    ├─→ build-3.10 (Python 3.10.12)
+    ├─→ build-310 (Python 3.10.12)
     │   └─→ Test voting module
-    ├─→ build-3.11 (Python 3.11.6)
+    ├─→ build-311 (Python 3.11.6)
     │   └─→ Test voting module
     └─→ release (crea automática release)
         └─→ Tag + Release creada

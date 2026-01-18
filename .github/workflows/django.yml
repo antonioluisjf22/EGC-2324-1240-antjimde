@@ -43,7 +43,7 @@ jobs:
     - name: Run tests (voting module only)
       run: |
         cd decide
-        ./manage.py test voting --keepdb
+        python manage.py test voting
 
   build-311:
 
@@ -82,4 +82,4 @@ jobs:
     - name: Run tests (voting module only)
       run: |
         cd decide
-        ./manage.py test voting --keepdb
+        python manage.py test voting
